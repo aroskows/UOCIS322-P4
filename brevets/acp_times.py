@@ -40,25 +40,10 @@ def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
     prev_keys = []
     for key in data:
         if  dist <= key:
-            if dist > 200:
-                h, m = 0, 0
-                brev = brevet_dist_km
-                for i in reversed(prev_keys):
-                    print(i, brev, dist)
-                    print(data[brev])
-                    th, tm = helper(dist-i, brev, data)
-                    dist = dist - (dist- i)
-                    print(th, tm)
-                    h += th
-                    m += tm
-                    brev = i
-                break
-            
-            else:
-                h, m = helper(dist, brevet_dist_km, data)
-                #print("h =", h)
-                #print("m =", m)
-                break
+            h, m = helper(dist, brevet_dist_km, data)
+            #print("h =", h)
+            #print("m =", m)
+            break
             prev_keys.appened(key)
 
     rslt =  brevet_start_time.shift(hours = h, minutes = m)
@@ -84,12 +69,12 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
         if dist <= ((brevet_dist_km * 0.2) + brevet_dist_km):
             dist = brevet_dist_km
         else:
-            print("too big")
+           # print("too big")
             #break its too big
             return -1
 
     if dist == brevet_dist_km:
-        print("EQUAL")
+        #print("EQUAL")
         if dist == 200:
             h = 13
             m = 30
@@ -111,11 +96,14 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
                     h, m = 0, 0
                     brev = brevet_dist_km
                     for i in reversed(prev_keys):
-                        print(i, brev, dist)
-                        print(data[brev])
+                        #tried to do this but it doesn't work sooo :(
+                        #this is the weird if its bigger than we have to do the math for 
+                        # the smaller ones
+                        #print(i, brev, dist)
+                        #print(data[brev])
                         th, tm = helper(dist-i, brev, data)
                         dist = dist - (dist- i)
-                        print(th, tm)
+                        #print(th, tm)
                         h += th
                         m += tm
                         brev = i
