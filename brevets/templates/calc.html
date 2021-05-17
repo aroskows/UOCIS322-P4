@@ -120,11 +120,20 @@
             // you need to pass much more!
             // View flask_brevets.py for details.
             function calc_times(control) {
+	      var brevet_dist_km = document.getElementById('brevet_dist_km').value;
+	      //var begin_date = document.getElementById('begin_date')
+	      //var brevet_dist_km = $("input[name='distance']").val();
+	      var begin_date = $("input[name='begin_date']").val();
               var km = control.find("input[name='km']").val();
               var open_time_field = control.find("input[name='open']");
               var close_time_field = control.find("input[name='close']");
+	      console.log("brev = " + brevet_dist_km);
+	      console.log("start = " + begin_date);
+	      console.log("start = " + typeof begin_date);
+	      console.log($("input[name='distance']").val())
+              console.log(km)
 
-              $.getJSON(TIME_CALC_URL, {km: km}).done(
+              $.getJSON(TIME_CALC_URL, {km: km, begin_date: begin_date, brevet_dist_km: brevet_dist_km}).done(
                 function(data) {
                    var times = data.result;
                    console.log("Got a response: ");
